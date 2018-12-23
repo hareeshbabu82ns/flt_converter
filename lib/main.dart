@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
               bodyColor: Colors.blue[700],
               displayColor: Colors.grey[600],
             ),
-        primaryColor: Colors.grey[500],
-        textSelectionHandleColor: Colors.green[500],
+        primaryColor: Colors.green[500],
+        textSelectionHandleColor: Colors.purple[500],
       ),
       home: CategoriesScreen(),
     );

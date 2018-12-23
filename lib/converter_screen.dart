@@ -41,10 +41,11 @@ class _ConverterScreen extends State<ConverterScreen> {
     setState(() {
       if (updateFrom) {
         _inputValueCtrl.text = _format(
-            (_outputValue / _toValue.conversion) * _fromValue.conversion);
+            (double.parse(_outputValueCtrl.text) / _toValue.conversion) *
+                _fromValue.conversion);
       } else if (updateTo) {
-        _outputValueCtrl.text = _format(
-            _inputValue * (_toValue.conversion / _fromValue.conversion));
+        _outputValueCtrl.text = _format(double.parse(_inputValueCtrl.text) *
+            (_toValue.conversion / _fromValue.conversion));
       }
     });
   }

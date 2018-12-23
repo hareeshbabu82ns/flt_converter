@@ -41,10 +41,7 @@ class CategoryLineItem extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(right: 16.0),
-                  child: Icon(
-                    category.iconData,
-                    size: _iconSize,
-                  ),
+                  child: Image.asset(category.iconLocation),
                 ),
                 Center(
                   child: Text(

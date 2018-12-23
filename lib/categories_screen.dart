@@ -55,83 +55,31 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         .loadString('assets/data/regular_units.json');
     final data = JsonDecoder().convert(json);
 
+    int _categoryIdx = 0;
     data.keys.forEach((String key) {
       final List<Unit> units =
           data[key].map<Unit>((data) => Unit.fromJson(data)).toList();
       final Category category = Category(
         categoryText: key,
         color: Colors.green,
-        iconData: Icons.cake,
+        iconLocation: _icons[_categoryIdx],
         units: units,
       );
+      _categoryIdx++;
       setState(() {
         categories.add(category);
       });
     });
   }
-}
 
-List<Category> _fetchCategories() {
-  final List<Category> categories = [];
-  categories.add(
-    Category(
-      categoryText: "Length",
-      iconData: Icons.cake,
-      color: Colors.purple,
-      units: _fetchUnits("Length"),
-    ),
-  );
-  categories.add(Category(
-    categoryText: "Area",
-    iconData: Icons.cake,
-    color: Colors.purple,
-    units: _fetchUnits("Area"),
-  ));
-  categories.add(Category(
-    categoryText: "Volume",
-    iconData: Icons.cake,
-    color: Colors.orange,
-    units: _fetchUnits("Volume"),
-  ));
-  categories.add(Category(
-    categoryText: "Mass",
-    iconData: Icons.line_weight,
-    color: Colors.blue,
-    units: _fetchUnits("Mass"),
-  ));
-  categories.add(Category(
-    categoryText: "Time",
-    iconData: Icons.av_timer,
-    color: Colors.yellow,
-    units: _fetchUnits("Time"),
-  ));
-  categories.add(Category(
-    categoryText: "Digital Storage",
-    iconData: Icons.sd_storage,
-    color: Colors.purple,
-    units: _fetchUnits("Digital Storage"),
-  ));
-  categories.add(Category(
-    categoryText: "Energy",
-    iconData: Icons.cake,
-    color: Colors.purple,
-    units: _fetchUnits("Energy"),
-  ));
-  categories.add(Category(
-    categoryText: "Currency",
-    iconData: Icons.cake,
-    color: Colors.purple,
-    units: _fetchUnits("Currency"),
-  ));
-  return categories;
-}
-
-List<Unit> _fetchUnits(String forCategory) {
-  return List<Unit>.generate(
-    10,
-    (int i) => Unit(
-          name: '$forCategory ${++i}',
-          conversion: i.toDouble(),
-        ),
-  );
+  static const _icons = <String>[
+    'assets/icons/length.png',
+    'assets/icons/area.png',
+    'assets/icons/volume.png',
+    'assets/icons/mass.png',
+    'assets/icons/time.png',
+    'assets/icons/digital_storage.png',
+    'assets/icons/power.png',
+    'assets/icons/currency.png',
+  ];
 }
