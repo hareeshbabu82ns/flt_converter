@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './category_line_item.dart';
 import 'model/category.dart';
 import 'model/unit.dart';
+import 'api.dart';
 
 import 'dart:convert';
 import 'dart:async';
@@ -15,11 +16,20 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
   var categories = [];
+  Api api = Api();
+
   @override
   void initState() {
     super.initState();
-    // categories = _fetchCategories();
-    _fetchLocalCategories();
+  }
+
+  @override
+  Future<void> didChangeDependencies() async {
+    super.didChangeDependencies();
+    if (categories.isEmpty) {
+      await _fetchLocalCategories();
+      await _fetchApiCategories();
+    }
   }
 
   @override
@@ -48,6 +58,21 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             categories.map((category) => CategoryLineItem(category)).toList(),
       );
     }
+  }
+
+  Future<Null> _fetchApiCategories() async {
+    var key = 'Currency';
+    var units = await api.getUnits(key);
+
+    final Category category = Category(
+      categoryText: key,
+      color: Colors.green,
+      iconLocation: _icons[categories.length],
+      units: units,
+    );
+    setState(() {
+      categories.add(category);
+    });
   }
 
   Future<Null> _fetchLocalCategories() async {

@@ -69,7 +69,7 @@ class _ConverterScreen extends State<ConverterScreen> {
   void _updateFromConversion(dynamic unitName) {
     setState(() {
       _fromValue = widget.units.firstWhere((unit) => unit.name == unitName);
-      _updateConversion(updateFrom: true);
+      _updateConversion(updateTo: true);
     });
   }
 
